@@ -1,31 +1,46 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
-describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+import { TestBed } from "@angular/core/testing";
+import { provideRouter, RouterLink, RouterOutlet } from "@angular/router";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { AppComponent } from "./app.component";
+
+describe("AppComponent", () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [AppComponent],
       imports: [
-        RouterTestingModule
+        MatSidenavModule,
+        MatListModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+
+        // ✅ needed for router-outlet + routerLink
+        RouterOutlet,
+        RouterLink,
       ],
-      declarations: [
-        AppComponent
-      ],
+      providers: [provideRouter([])],
     }).compileComponents();
-  }));
-  it('should create the app', waitForAsync(() => {
+  });
+
+  it("should create the app", () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'app'`, waitForAsync(() => {
+    expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it(`should have as title 'app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
-  }));
-  it('should render title in a h1 tag', waitForAsync(() => {
+    expect(fixture.componentInstance.title).toEqual("app");
+  });
+
+  it("should render a mat-toolbar", () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
-  }));
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector("mat-toolbar")).toBeTruthy();
+  });
 });
