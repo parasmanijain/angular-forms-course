@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, provideZoneChangeDetection } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -94,6 +94,10 @@ import { LoginReactiveComponent } from "./login-reactive/login-reactive.componen
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [CoursesService, provideHttpClient(withInterceptorsFromDi())],
+  providers: [
+    CoursesService,
+    provideHttpClient(withInterceptorsFromDi()),
+    provideZoneChangeDetection(),
+  ],
 })
 export class AppModule {}
