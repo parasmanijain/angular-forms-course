@@ -28,17 +28,17 @@ import { LessonsDataSource } from "../services/lessons.datasource";
   standalone: false,
 })
 export class CourseComponent implements OnInit, AfterViewInit {
-  course: Course;
+  course!: Course;
 
-  dataSource: LessonsDataSource;
+  dataSource!: LessonsDataSource;
 
   displayedColumns = ["seqNo", "description", "duration"];
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  @ViewChild("input", { static: true }) input: ElementRef;
+  @ViewChild("input", { static: true }) input!: ElementRef;
 
   constructor(
     private route: ActivatedRoute,

@@ -11,9 +11,9 @@ import { map } from "rxjs/operators";
   standalone: false,
 })
 export class HomeComponent implements OnInit {
-  beginnerCourses$: Observable<Course[]>;
+  beginnerCourses$!: Observable<Course[]>;
 
-  advancedCourses$: Observable<Course[]>;
+  advancedCourses$!: Observable<Course[]>;
 
   constructor(private coursesService: CoursesService) {}
 

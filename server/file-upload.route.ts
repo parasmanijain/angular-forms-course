@@ -1,17 +1,20 @@
+import { Request, Response } from "express";
+import { UploadedFile } from "express-fileupload";
 
-import {Request, Response} from 'express';
+export function onFileupload(req: Request, res: Response) {
+  // Check if files exist and thumbnail is present
+  if (!req["files"] || !req["files"].thumbnail) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
 
+  let file = req["files"].thumbnail;
 
-export function onFileupload(req:Request, res: Response) {
+  // Handle both single file and array of files
+  const uploadedFile = Array.isArray(file) ? file[0] : (file as UploadedFile);
 
-  let file = req['files'].thumbnail;
-
-  console.log("File uploaded: ", file.name);
+  console.log("File uploaded: ", uploadedFile.name);
 
   setTimeout(() => {
-    res.status(200).json({message: 'File uploaded successfully.'});
-  }, 2000)
-
-
-
+    res.status(200).json({ message: "File uploaded successfully." });
+  }, 2000);
 }
